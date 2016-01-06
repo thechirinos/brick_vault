@@ -1,6 +1,5 @@
-<h1>Editing lego_set</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @lego_set %> |
-<%= link_to 'Back', lego_sets_path %>
+<%- model_class = LegoSet -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => LegoSet %></h1>
+</div>
+<%= render :partial => 'form' %>

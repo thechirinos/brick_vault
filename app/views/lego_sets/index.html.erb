@@ -1,35 +1,44 @@
-<h1>Listing lego_sets</h1>
-
-<table>
+<%- model_class = LegoSet -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => LegoSet %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Set</th>
-      <th>Name</th>
-      <th>Link</th>
-      <th>User</th>
-      <th>Description</th>
-      <th>Theme</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:set) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:link) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:theme) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @lego_sets.each do |lego_set| %>
       <tr>
+        <td><%= lego_set.id %></td>
         <td><%= lego_set.set %></td>
         <td><%= lego_set.name %></td>
         <td><%= lego_set.link %></td>
-        <td><%= lego_set.user %></td>
         <td><%= lego_set.description %></td>
         <td><%= lego_set.theme %></td>
-        <td><%= link_to 'Show', lego_set %></td>
-        <td><%= link_to 'Edit', edit_lego_set_path(lego_set) %></td>
-        <td><%= link_to 'Destroy', lego_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l lego_set.created_at, format: :long %></td>
+        <td>
+          <%= link_to lego_set_path(lego_set), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to lego_set_path(lego_set), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Lego set', new_lego_set_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_lego_set_path,
+            :class => 'btn btn-primary' %>

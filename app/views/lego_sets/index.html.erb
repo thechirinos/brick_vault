@@ -1,30 +1,27 @@
 <%- model_class = LegoSet -%>
+<div class="container">
 <div class="page-header">
-  <h1><%=t '.title', :default => LegoSet %></h1>
+  <h1>Sets</h1>
 </div>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
       <th><%= model_class.human_attribute_name(:set) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:link) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:theme) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @lego_sets.each do |lego_set| %>
       <tr>
-        <td><%= lego_set.id %></td>
         <td><%= lego_set.set %></td>
         <td><%= lego_set.name %></td>
-        <td><%= lego_set.link %></td>
+        <td><%= link_to lego_set.link, lego_set.link.to_s %></td>
         <td><%= lego_set.description %></td>
         <td><%= lego_set.theme %></td>
-        <td><%=l lego_set.created_at, format: :long %></td>
         <td>
           <%= link_to lego_set_path(lego_set), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
             <%= glyph 'info-sign' %>
@@ -36,9 +33,11 @@
         </td>
       </tr>
     <% end %>
+    </div>
   </tbody>
 </table>
-
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_lego_set_path,
             :class => 'btn btn-primary' %>
+</div>
+

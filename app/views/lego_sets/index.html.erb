@@ -1,43 +1,33 @@
 <%- model_class = LegoSet -%>
 <div class="container">
-<div class="page-header">
-  <h1>Sets</h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:set) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:link) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:theme) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @lego_sets.each do |lego_set| %>
-      <tr>
-        <td><%= lego_set.set %></td>
-        <td><%= lego_set.name %></td>
-        <td><%= link_to lego_set.link, lego_set.link.to_s %></td>
-        <td><%= lego_set.description %></td>
-        <td><%= lego_set.theme %></td>
-        <td>
-          <%= link_to lego_set_path(lego_set), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
-            <%= glyph 'info-sign' %>
-            <%= glyph 'pencil' %>
-          <%- end -%>
-          <%= link_to lego_set_path(lego_set), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
-            <%= glyph 'remove' %>
-          <%- end -%>
-        </td>
-      </tr>
-    <% end %>
+  <div class="page-header">
+    <h1>Sets</h1>
+  </div>
+
+  <% @lego_sets.each do |lego_set| %>
+  
+  <div class="panel panel-default col-lg-5" style="margin-right: 20px">
+    <div class="panel-body" style="min-height: 225px">
+      <div class="col-lg-5">
+        <!-- <img src="http://placehold.it/225x225"> -->
+
+        <a href="/lego_sets/<%= lego_set.id %>">
+          <%= image_tag lego_set.set_img, :style => 'max-width: 225px; max-height: 195px; ' %>
+        </a>
+
+      </div>
+      <div class="col-lg-5 col-lg-offset-2">
+        <a href="/lego_sets/<%= lego_set.id %>">
+          <h3 style="margin-top: 10px"><%= lego_set.name %></h3>
+        </a>
+        <span style="color: #999"><%= link_to lego_set.set, lego_set.link.to_s, :target => '_blank' %></span>
+      </div>
     </div>
-  </tbody>
-</table>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_lego_set_path,
-            :class => 'btn btn-primary' %>
+  </div>
+  
+  <% end %>
 </div>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+new_lego_set_path,
+:class => 'btn btn-primary' %>
 

@@ -1,4 +1,7 @@
 <%= form_for @lego_set, :html => { :class => 'form-horizontal form-model' } do |f| %>
+  
+  <%= f.file_field :set_img %>
+
   <div class="form-group">
     <%= f.label :set, :class => 'control-label col-md-2' %>
     <div class="col-md-10">

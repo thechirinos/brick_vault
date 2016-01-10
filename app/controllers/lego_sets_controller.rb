@@ -74,6 +74,6 @@ class LegoSetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lego_set_params
-      params.require(:lego_set).permit(:set, :name, :link, :user_id, :description, :theme)
+      params.require(:lego_set).permit(:set, :name, :link, :user_id, :description, :theme, :set_img)
     end
 end
